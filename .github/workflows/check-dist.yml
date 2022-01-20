@@ -35,12 +35,14 @@ jobs:
         run: npm run prepare
 
       - name: Compare the expected and actual dist/ directories
+        shell: pwsh
         run: |
-          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
+          if ($(git diff --ignore-space-at-eol dist/ | Measure-Object -line).Lines -gt 0)
+          {
             echo "Detected uncommitted changes after build.  See status below:"
             git diff
             exit 1
-          fi
+          }
         id: diff
 
       # If index.js was different than expected, upload the expected version as an artifact
