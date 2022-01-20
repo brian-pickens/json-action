@@ -1,21 +1,15 @@
 const core = require('@actions/core');
-const wait = require('./wait');
-
+const fs = require('fs');
 
 // most @actions toolkit packages have async methods
 async function run() {
-  try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    core.setFailed(error.message);
-  }
+  const jsonFile = core.getInput('file', { "required": true });
+  let rawdata = fs.readFileSync(jsonFile);
+  let data = JSON.parse(rawdata);
+  core.setOutput('json', data);
 }
 
-run();
+run().catch(err => {
+  console.error(err);
+  core.setFailed("Unexpected error");
+});
