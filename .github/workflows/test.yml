@@ -7,7 +7,8 @@ on:
 
 jobs:
   # unit tests
-  units:
+  unit_tests:
+    name: "Run Unit Tests"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,6 +17,7 @@ jobs:
 
   # test action works running from the graph
   test:
+    name: "Run Action"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
