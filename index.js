@@ -6,6 +6,7 @@ async function run() {
   const jsonFile = core.getInput('file', { "required": true });
   let rawdata = fs.readFileSync(jsonFile);
   let data = JSON.parse(rawdata);
+  core.setOutput('marco', "polo");
   core.setOutput('json', data);
 }
 
