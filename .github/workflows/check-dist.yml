@@ -18,7 +18,7 @@ on:
 
 jobs:
   check-dist:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -29,10 +29,10 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
-        run: npx npm@6 ci
+        run: rm -rf node_modules && npx npm@6 ci  
 
       - name: Rebuild the dist/ directory
-        run: npm run prepare
+        run: npx npm@6 run prepare
 
       - name: Compare the expected and actual dist/ directories
         shell: pwsh
