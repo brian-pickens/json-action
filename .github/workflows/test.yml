@@ -34,6 +34,7 @@ jobs:
     - name: Check output
       shell: pwsh
       run: |
+        echo "${{ steps.action.outputs.marco }}"
         if ("${{ steps.action.outputs.json.foo }}" -ne "bar")
         {
           echo "The action did not transform the json file properly."
