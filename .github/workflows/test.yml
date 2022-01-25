@@ -40,3 +40,5 @@ jobs:
           echo "The action did not transform the json file properly."
           exit 1
         }
+
+        
