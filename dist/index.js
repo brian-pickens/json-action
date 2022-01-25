@@ -1684,7 +1684,12 @@ async function run() {
   const jsonFile = core.getInput('file', { "required": true });
   let rawdata = fs.readFileSync(jsonFile);
   let data = JSON.parse(rawdata);
-  core.setOutput('json', data);
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      core.setOutput(key, data[key]);
+    }
+  }
+
 }
 
 run().catch(err => {
