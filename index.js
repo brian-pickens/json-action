@@ -6,8 +6,12 @@ async function run() {
   const jsonFile = core.getInput('file', { "required": true });
   let rawdata = fs.readFileSync(jsonFile);
   let data = JSON.parse(rawdata);
-  core.setOutput('marco', "polo");
-  core.setOutput('json', data);
+  for (var key in data) {
+    if (p.hasOwnProperty(key)) {
+      core.setOutput(key, data[key]);
+    }
+  }
+
 }
 
 run().catch(err => {
