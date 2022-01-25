@@ -12,8 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npm ci
-    - run: npm test
+    - name: Set Node.js
+      uses: actions/setup-node@v2.5.1
+      with:
+        node-version: 16.x
+    - run: npx npm@6 ci
+    - run: npx npm@6 test
 
   # test action works running from the graph
   test:
