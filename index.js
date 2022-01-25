@@ -7,7 +7,7 @@ async function run() {
   let rawdata = fs.readFileSync(jsonFile);
   let data = JSON.parse(rawdata);
   for (var key in data) {
-    if (p.hasOwnProperty(key)) {
+    if (data.hasOwnProperty(key)) {
       core.setOutput(key, data[key]);
     }
   }
